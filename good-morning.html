@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Good Morning</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --dawn-deep: #1a0a2e;
+      --dawn-mid: #3d1a5c;
+      --horizon: #c45c3a;
+      --gold: #f0a500;
+      --blush: #f7d1a0;
+      --cream: #fdf3e3;
+      --text-dark: #2b1a0e;
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--dawn-deep);
+      position: relative;
+    }
+
+    /* Sky gradient background */
+    .sky {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        #0d0520 0%,
+        #2a0d4e 25%,
+        #7a2a3a 50%,
+        #c45c3a 70%,
+        #f0a500 85%,
+        #fdf3e3 100%
+      );
+      animation: skyrise 4s ease-out forwards;
+      z-index: 0;
+    }
+
+    @keyframes skyrise {
+      0%   { opacity: 0; filter: brightness(0.2); }
+      100% { opacity: 1; filter: brightness(1); }
+    }
+
+    /* Sun */
+    .sun {
+      position: fixed;
+      bottom: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 40% 40%, #fff8c0, #f0a500 60%, #c45c3a);
+      box-shadow:
+        0 0 60px 30px rgba(240,165,0,0.4),
+        0 0 120px 60px rgba(240,165,0,0.2),
+        0 0 200px 100px rgba(196,92,58,0.15);
+      animation: sunrise 3.5s cubic-bezier(0.22, 1, 0.36, 1) 0.5s forwards;
+      z-index: 1;
+    }
+
+    @keyframes sunrise {
+      0%   { bottom: -80px; opacity: 0.2; }
+      100% { bottom: 18%; opacity: 1; }
+    }
+
+    /* Rays */
+    .rays {
+      position: fixed;
+      bottom: calc(18% + 70px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0; height: 0;
+      z-index: 1;
+      animation: fadeRays 1s ease 3s forwards;
+      opacity: 0;
+    }
+
+    @keyframes fadeRays { to { opacity: 1; } }
+
+    .ray {
+      position: absolute;
+      width: 2px;
+      background: linear-gradient(to top, rgba(255,220,100,0.6), transparent);
+      transform-origin: bottom center;
+      border-radius: 2px;
+    }
+
+    /* Horizon hills */
+    .hills {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 30%;
+      z-index: 2;
+    }
+
+    .hill {
+      position: absolute;
+      bottom: 0;
+      border-radius: 50% 50% 0 0;
+      background: linear-gradient(180deg, #1a3320, #0d1f14);
+    }
+    .hill-1 { width: 60%; height: 85%; left: -10%; }
+    .hill-2 { width: 55%; height: 70%; right: -10%; background: linear-gradient(180deg, #12281a, #0a1810); }
+    .hill-3 { width: 35%; height: 55%; left: 30%; background: linear-gradient(180deg, #1e3d28, #112318); }
+
+    /* Stars */
+    .stars {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      animation: fadeStars 3s ease-out forwards;
+    }
+    @keyframes fadeStars { 0% { opacity: 1; } 100% { opacity: 0; } }
+
+    .star {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: white;
+      border-radius: 50%;
+    }
+
+    /* Main card */
+    .card {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 3rem 4rem;
+      animation: cardReveal 1s ease 2.5s both;
+    }
+
+    @keyframes cardReveal {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .greeting-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: 0.9rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--blush);
+      opacity: 0.85;
+      margin-bottom: 0.5rem;
+      animation: fadeUp 1s ease 3s both;
+    }
+
+    .greeting-main {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 10vw, 7rem);
+      font-weight: 700;
+      color: var(--cream);
+      line-height: 1;
+      text-shadow:
+        0 2px 30px rgba(240,165,0,0.3),
+        0 0 80px rgba(240,165,0,0.1);
+      animation: fadeUp 1s ease 3.1s both;
+    }
+
+    .greeting-italic {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      color: var(--gold);
+      display: block;
+      margin-top: -0.2em;
+      text-shadow: 0 2px 20px rgba(240,165,0,0.4);
+      animation: fadeUp 1s ease 3.2s both;
+    }
+
+    .divider {
+      width: 80px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      margin: 1.5rem auto;
+      animation: growLine 1s ease 3.4s both;
+    }
+    @keyframes growLine {
+      from { width: 0; opacity: 0; }
+      to   { width: 80px; opacity: 1; }
+    }
+
+    .subtext {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      color: var(--blush);
+      letter-spacing: 0.08em;
+      opacity: 0.9;
+      animation: fadeUp 1s ease 3.5s both;
+    }
+
+    .time-display {
+      margin-top: 2rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(0.8rem, 2vw, 1rem);
+      letter-spacing: 0.3em;
+      color: rgba(253,243,227,0.5);
+      animation: fadeUp 1s ease 3.7s both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Birds */
+    .birds {
+      position: fixed;
+      top: 20%;
+      left: 0; right: 0;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .bird {
+      position: absolute;
+      width: 20px; height: 6px;
+      border-top: 2px solid rgba(253,243,227,0.7);
+      border-radius: 50% 50% 0 0;
+      animation: fly linear infinite;
+    }
+
+    .bird::after {
+      content: '';
+      position: absolute;
+      left: 10px; top: -2px;
+      width: 10px; height: 6px;
+      border-top: 2px solid rgba(253,243,227,0.7);
+      border-radius: 50% 50% 0 0;
+    }
+
+    @keyframes fly {
+      from { transform: translateX(-50px); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      to   { transform: translateX(110vw); opacity: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sky"></div>
+
+  <!-- Stars -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Sun -->
+  <div class="sun"></div>
+
+  <!-- Sun rays -->
+  <div class="rays" id="rays"></div>
+
+  <!-- Hills -->
+  <div class="hills">
+    <div class="hill hill-1"></div>
+    <div class="hill hill-2"></div>
+    <div class="hill hill-3"></div>
+  </div>
+
+  <!-- Birds -->
+  <div class="birds" id="birds"></div>
+
+  <!-- Card -->
+  <div class="card">
+    <p class="greeting-label">A new day begins</p>
+    <h1 class="greeting-main">
+      Good
+      <span class="greeting-italic">Morning</span>
+    </h1>
+    <div class="divider"></div>
+    <p class="subtext">May this day bring you light, joy &amp; wonder.</p>
+    <p class="time-display" id="clock"></p>
+  </div>
+
+  <script>
+    // Stars
+    const starsEl = document.getElementById('stars');
+    for (let i = 0; i < 80; i++) {
+      const s = document.createElement('div');
+      s.className = 'star';
+      s.style.left = Math.random() * 100 + '%';
+      s.style.top = Math.random() * 60 + '%';
+      s.style.opacity = (Math.random() * 0.6 + 0.2).toFixed(2);
+      s.style.width = s.style.height = (Math.random() * 2 + 1) + 'px';
+      starsEl.appendChild(s);
+    }
+
+    // Rays
+    const raysEl = document.getElementById('rays');
+    const rayCount = 12;
+    for (let i = 0; i < rayCount; i++) {
+      const r = document.createElement('div');
+      r.className = 'ray';
+      const angle = (i / rayCount) * 360;
+      const len = 80 + Math.random() * 80;
+      r.style.height = len + 'px';
+      r.style.transform = `rotate(${angle}deg)`;
+      r.style.left = '-1px';
+      r.style.bottom = '0';
+      raysEl.appendChild(r);
+    }
+
+    // Birds
+    const birdsEl = document.getElementById('birds');
+    const birdData = [
+      { top: '10%', delay: '4.5s', duration: '8s' },
+      { top: '25%', delay: '5.5s', duration: '10s' },
+      { top: '5%',  delay: '6.5s', duration: '9s' },
+      { top: '18%', delay: '7s',   duration: '11s' },
+    ];
+    birdData.forEach(b => {
+      const bird = document.createElement('div');
+      bird.className = 'bird';
+      bird.style.top = b.top;
+      bird.style.animationDelay = b.delay;
+      bird.style.animationDuration = b.duration;
+      birdsEl.appendChild(bird);
+    });
+
+    // Clock
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2,'0');
+      const m = String(now.getMinutes()).padStart(2,'0');
+      const s = String(now.getSeconds()).padStart(2,'0');
+      document.getElementById('clock').textContent = `${h} : ${m} : ${s}`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+  </script>
+</body>
+</html>
