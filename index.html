@@ -544,32 +544,49 @@ const SUPABASE_ANON = 'sb_publishable_D00_YYxWu1hhDYuwgO3bKw_ToWrn6PN';         
     });
 
     // ─── EMAIL LOGIN ─────────────────────────────────────────
-    async function handleLogin() {
-      const email    = document.getElementById('email').value.trim();
-      const password = document.getElementById('password').value;
-      const btn      = document.getElementById('login-btn');
+  async function handleLogin() {
+  const email    = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value;
+  const btn      = document.getElementById('login-btn');
 
-      document.getElementById('error-msg').classList.remove('visible');
+  document.getElementById('error-msg').classList.remove('visible');
 
-      if (!email || !password) {
-        showError('Please enter your email and password.');
-        return;
+  if (!email || !password) {
+    showError('Please enter your email and password.');
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Signing in…';
+
+  try {
+
+    // CHANGE THIS URL
+    const response = await fetch(
+      'https://deploy-simple-back-end.onrender.com.onrender.com/api/v1/auth?email='
+      + encodeURIComponent(email)
+      + '&password='
+      + encodeURIComponent(password),
+      {
+        method: 'GET'
       }
+    );
 
-      btn.disabled = true;
-      btn.innerHTML = '<span class="spinner"></span> Signing in\u2026';
+    const text = await response.text();
 
-      const { data, error } = await sbClient.auth.signInWithPassword({ email, password });
-
-      if (error) {
-        showError(error.message || 'Invalid email or password.');
-      } else {
-        showGoodMorning(getNameFromSession(data.session));
-      }
-
-      btn.disabled = false;
-      btn.innerHTML = 'Continue';
+    if (response.ok) {
+      showGoodMorning(email.split('@')[0]);
+    } else {
+      showError(text || 'Invalid email or password.');
     }
+
+  } catch (err) {
+    showError('Unable to connect to server.');
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = 'Continue';
+}
 
     // ─── GOOGLE LOGIN ────────────────────────────────────────
     async function handleGoogleLogin() {
