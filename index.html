@@ -4,9 +4,15 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Good Morning</title>
+
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet"/>
+
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
     :root {
       --dawn-deep: #1a0a2e;
@@ -17,18 +23,26 @@
     }
 
     html, body {
-      width: 100%; height: 100%;
+      width: 100%;
+      height: 100%;
       font-family: 'Cormorant Garamond', serif;
       overflow: hidden;
     }
 
-    /* ─── PAGES ─── */
-    .page { position: fixed; inset: 0; transition: opacity 0.8s ease, transform 0.8s ease; }
-    .page.hidden { opacity: 0; pointer-events: none; transform: scale(1.03); }
+    .page {
+      position: fixed;
+      inset: 0;
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
 
-    /* ════════════════════════════════
-       LOGIN PAGE
-    ════════════════════════════════ */
+    .page.hidden {
+      opacity: 0;
+      pointer-events: none;
+      transform: scale(1.03);
+    }
+
+    /* LOGIN PAGE */
+
     #login-page {
       display: flex;
       align-items: center;
@@ -37,7 +51,6 @@
       z-index: 20;
     }
 
-    /* Subtle starfield bg */
     #login-page::before {
       content: '';
       position: absolute;
@@ -47,22 +60,19 @@
         radial-gradient(1px 1px at 30% 55%, rgba(255,255,255,0.3) 0%, transparent 100%),
         radial-gradient(1px 1px at 55% 10%, rgba(255,255,255,0.35) 0%, transparent 100%),
         radial-gradient(1px 1px at 75% 40%, rgba(255,255,255,0.25) 0%, transparent 100%),
-        radial-gradient(1px 1px at 88% 70%, rgba(255,255,255,0.3) 0%, transparent 100%),
-        radial-gradient(1px 1px at 20% 80%, rgba(255,255,255,0.2) 0%, transparent 100%),
-        radial-gradient(1px 1px at 65% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
-        radial-gradient(2px 2px at 45% 30%, rgba(255,255,230,0.4) 0%, transparent 100%),
-        radial-gradient(1px 1px at 92% 15%, rgba(255,255,255,0.35) 0%, transparent 100%);
+        radial-gradient(1px 1px at 88% 70%, rgba(255,255,255,0.3) 0%, transparent 100%);
       pointer-events: none;
     }
 
-    /* Glow blob */
     #login-page::after {
       content: '';
       position: absolute;
-      width: 600px; height: 600px;
+      width: 600px;
+      height: 600px;
       border-radius: 50%;
       background: radial-gradient(circle, rgba(240,165,0,0.07) 0%, transparent 70%);
-      top: 50%; left: 50%;
+      top: 50%;
+      left: 50%;
       transform: translate(-50%, -50%);
       pointer-events: none;
     }
@@ -80,8 +90,14 @@
     }
 
     @keyframes boxReveal {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .login-eyebrow {
@@ -146,7 +162,9 @@
       background: rgba(240,165,0,0.05);
     }
 
-    .field input::placeholder { color: rgba(253,243,227,0.2); }
+    .field input::placeholder {
+      color: rgba(253,243,227,0.2);
+    }
 
     .error-msg {
       font-size: 0.8rem;
@@ -157,7 +175,10 @@
       opacity: 0;
       transition: opacity 0.3s;
     }
-    .error-msg.visible { opacity: 1; }
+
+    .error-msg.visible {
+      opacity: 1;
+    }
 
     .login-btn {
       width: 100%;
@@ -175,70 +196,15 @@
       transition: opacity 0.3s, transform 0.2s;
     }
 
-    .login-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-    .login-btn:active { transform: translateY(0); }
-    .login-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-    .login-divider {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin: 1.5rem 0;
-    }
-    .login-divider::before,
-    .login-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: rgba(240,165,0,0.15);
-    }
-    .login-divider span {
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      color: rgba(253,243,227,0.3);
-      text-transform: uppercase;
+    .login-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
     }
 
-    /* Google button */
-    .google-btn {
-      width: 100%;
-      padding: 0.8rem;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 2px;
-      color: var(--cream);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.95rem;
-      letter-spacing: 0.05em;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.6rem;
-      transition: background 0.3s, border-color 0.3s;
-    }
-    .google-btn:hover {
-      background: rgba(255,255,255,0.09);
-      border-color: rgba(255,255,255,0.2);
-    }
-
-    .google-icon {
-      width: 18px; height: 18px;
-      flex-shrink: 0;
-    }
-
-    .login-footer {
-      margin-top: 1.8rem;
-      text-align: center;
-      font-size: 0.78rem;
-      color: rgba(253,243,227,0.25);
-      letter-spacing: 0.05em;
-    }
-
-    /* Loading spinner on button */
     .spinner {
       display: inline-block;
-      width: 14px; height: 14px;
+      width: 14px;
+      height: 14px;
       border: 2px solid rgba(26,10,0,0.3);
       border-top-color: #1a0a00;
       border-radius: 50%;
@@ -246,91 +212,45 @@
       vertical-align: middle;
       margin-right: 6px;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ════════════════════════════════
-       GOOD MORNING PAGE
-    ════════════════════════════════ */
-    #gm-page { z-index: 10; }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* GOOD MORNING PAGE */
+
+    #gm-page {
+      z-index: 10;
+    }
 
     .sky {
       position: absolute;
       inset: 0;
-      background: linear-gradient(180deg,
-        #0d0520 0%, #2a0d4e 25%, #7a2a3a 50%,
-        #c45c3a 70%, #f0a500 85%, #fdf3e3 100%
+      background: linear-gradient(
+        180deg,
+        #0d0520 0%,
+        #2a0d4e 25%,
+        #7a2a3a 50%,
+        #c45c3a 70%,
+        #f0a500 85%,
+        #fdf3e3 100%
       );
-      animation: skyrise 4s ease-out forwards;
-    }
-
-    @keyframes skyrise {
-      from { filter: brightness(0.2); }
-      to   { filter: brightness(1); }
     }
 
     .sun {
       position: absolute;
-      bottom: -80px;
-      left: 50%; transform: translateX(-50%);
-      width: 140px; height: 140px;
+      bottom: 18%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       background: radial-gradient(circle at 40% 40%, #fff8c0, #f0a500 60%, #c45c3a);
       box-shadow:
         0 0 60px 30px rgba(240,165,0,0.4),
-        0 0 120px 60px rgba(240,165,0,0.2),
-        0 0 200px 100px rgba(196,92,58,0.15);
-      animation: sunrise 3.5s cubic-bezier(0.22,1,0.36,1) 0.5s forwards;
-    }
-    @keyframes sunrise {
-      from { bottom: -80px; opacity: 0.2; }
-      to   { bottom: 18%; opacity: 1; }
-    }
-
-    .rays {
-      position: absolute;
-      bottom: calc(18% + 70px);
-      left: 50%; transform: translateX(-50%);
-      z-index: 1;
-      animation: fadeRays 1s ease 3s forwards;
-      opacity: 0;
-    }
-    @keyframes fadeRays { to { opacity: 1; } }
-
-    .hills {
-      position: absolute;
-      bottom: 0; left: 0; right: 0;
-      height: 30%;
-      z-index: 2;
-    }
-    .hill { position: absolute; bottom: 0; border-radius: 50% 50% 0 0; }
-    .hill-1 { width: 60%; height: 85%; left: -10%; background: linear-gradient(180deg,#1a3320,#0d1f14); }
-    .hill-2 { width: 55%; height: 70%; right: -10%; background: linear-gradient(180deg,#12281a,#0a1810); }
-    .hill-3 { width: 35%; height: 55%; left: 30%; background: linear-gradient(180deg,#1e3d28,#112318); }
-
-    .stars-gm { position: absolute; inset: 0; z-index: 1; animation: fadeStars 3s ease-out forwards; }
-    @keyframes fadeStars { to { opacity: 0; } }
-    .star { position: absolute; width: 2px; height: 2px; background: white; border-radius: 50%; }
-
-    .birds { position: absolute; top: 20%; left: 0; right: 0; z-index: 5; pointer-events: none; }
-    .bird {
-      position: absolute;
-      width: 20px; height: 6px;
-      border-top: 2px solid rgba(253,243,227,0.7);
-      border-radius: 50% 50% 0 0;
-      animation: fly linear infinite;
-    }
-    .bird::after {
-      content: '';
-      position: absolute;
-      left: 10px; top: -2px;
-      width: 10px; height: 6px;
-      border-top: 2px solid rgba(253,243,227,0.7);
-      border-radius: 50% 50% 0 0;
-    }
-    @keyframes fly {
-      from { transform: translateX(-50px); opacity: 0; }
-      10%  { opacity: 1; } 90% { opacity: 1; }
-      to   { transform: translateX(110vw); opacity: 0; }
+        0 0 120px 60px rgba(240,165,0,0.2);
     }
 
     .gm-card {
@@ -343,11 +263,6 @@
       justify-content: center;
       text-align: center;
       padding: 2rem;
-      animation: cardReveal 1s ease 2.5s both;
-    }
-    @keyframes cardReveal {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
     }
 
     .greeting-label {
@@ -355,9 +270,7 @@
       letter-spacing: 0.4em;
       text-transform: uppercase;
       color: var(--blush);
-      opacity: 0.85;
       margin-bottom: 0.5rem;
-      animation: fadeUp 1s ease 3s both;
     }
 
     .greeting-main {
@@ -366,56 +279,34 @@
       font-weight: 700;
       color: var(--cream);
       line-height: 1;
-      text-shadow: 0 2px 30px rgba(240,165,0,0.3), 0 0 80px rgba(240,165,0,0.1);
-      animation: fadeUp 1s ease 3.1s both;
     }
 
     .greeting-italic {
-      font-family: 'Playfair Display', serif;
       font-style: italic;
       font-weight: 400;
       font-size: clamp(2rem, 6vw, 4.5rem);
       color: var(--gold);
       display: block;
-      margin-top: -0.2em;
-      text-shadow: 0 2px 20px rgba(240,165,0,0.4);
-      animation: fadeUp 1s ease 3.2s both;
     }
 
     .divider {
-      width: 80px; height: 1px;
+      width: 80px;
+      height: 1px;
       background: linear-gradient(90deg, transparent, var(--gold), transparent);
       margin: 1.5rem auto;
-      animation: growLine 1s ease 3.4s both;
-    }
-    @keyframes growLine {
-      from { width: 0; opacity: 0; }
-      to   { width: 80px; opacity: 1; }
     }
 
     .subtext {
       font-size: clamp(1rem, 2.5vw, 1.3rem);
       color: var(--blush);
       letter-spacing: 0.08em;
-      opacity: 0.9;
-      animation: fadeUp 1s ease 3.5s both;
     }
 
-    .user-greeting {
-      font-size: 0.85rem;
-      letter-spacing: 0.2em;
-      color: rgba(253,243,227,0.5);
-      text-transform: uppercase;
-      margin-top: 0.5rem;
-      animation: fadeUp 1s ease 3.6s both;
-    }
-
+    .user-greeting,
     .time-display {
-      margin-top: 1.5rem;
-      font-size: clamp(0.8rem, 2vw, 1rem);
-      letter-spacing: 0.3em;
-      color: rgba(253,243,227,0.5);
-      animation: fadeUp 1s ease 3.7s both;
+      margin-top: 1rem;
+      color: rgba(253,243,227,0.7);
+      letter-spacing: 0.2em;
     }
 
     .logout-btn {
@@ -423,264 +314,261 @@
       padding: 0.5rem 1.5rem;
       background: transparent;
       border: 1px solid rgba(253,243,227,0.2);
-      border-radius: 2px;
-      color: rgba(253,243,227,0.4);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.25em;
-      text-transform: uppercase;
+      color: rgba(253,243,227,0.7);
       cursor: pointer;
-      transition: all 0.3s;
-      animation: fadeUp 1s ease 3.8s both;
-    }
-    .logout-btn:hover {
-      border-color: rgba(253,243,227,0.5);
-      color: rgba(253,243,227,0.8);
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(12px); }
-      to   { opacity: 1; transform: translateY(0); }
+    /* WHATSAPP BUTTON */
+
+    .whatsapp-btn {
+      position: fixed;
+      top: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      z-index: 99999;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      text-decoration: none;
     }
+
+    .whatsapp-btn:hover {
+      transform: scale(1.08);
+      opacity: 0.92;
+    }
+
+    .whatsapp-icon {
+      width: 32px;
+      height: 32px;
+    }
+
   </style>
 </head>
+
 <body>
 
-  <!-- ─── LOGIN PAGE ─── -->
+  <!-- WHATSAPP BUTTON -->
+
+  <a
+    href="https://wa.me/919346579765?text=I%20want%20to%20explore%20more%20on%20this"
+    class="whatsapp-btn"
+    target="_blank"
+  >
+    <svg viewBox="0 0 32 32" class="whatsapp-icon">
+      <path fill="white"
+        d="M19.11 17.38c-.29-.14-1.69-.83-1.95-.92-.26-.1-.45-.14-.64.14-.19.29-.73.92-.9 1.11-.16.19-.33.22-.62.07-.29-.14-1.21-.44-2.31-1.39-.85-.76-1.43-1.69-1.59-1.97-.16-.29-.02-.44.12-.58.13-.13.29-.33.43-.5.14-.17.19-.29.29-.48.1-.19.05-.36-.02-.5-.07-.14-.64-1.54-.88-2.11-.23-.55-.47-.48-.64-.49l-.55-.01c-.19 0-.5.07-.76.36-.26.29-1 1-.97 2.43.02 1.43 1.02 2.8 1.17 2.99.14.19 2 3.06 4.85 4.29.68.29 1.21.47 1.62.6.68.22 1.3.19 1.79.12.55-.08 1.69-.69 1.93-1.36.24-.67.24-1.24.17-1.36-.07-.12-.26-.19-.55-.33z"/>
+    </svg>
+  </a>
+
+  <!-- LOGIN PAGE -->
+
   <div class="page" id="login-page">
+
     <div class="login-box">
+
       <p class="login-eyebrow">Welcome</p>
-      <h1 class="login-title">Sign in to <span>begin</span></h1>
-      <p class="login-sub">Your morning awaits on the other side.</p>
+
+      <h1 class="login-title">
+        Sign in to <span>begin</span>
+      </h1>
+
+      <p class="login-sub">
+        Your morning awaits on the other side.
+      </p>
 
       <div class="field">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="you@example.com" autocomplete="email"/>
+        <label>Email</label>
+        <input
+          type="email"
+          id="email"
+          placeholder="you@example.com"
+        />
       </div>
 
       <div class="field">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="••••••••" autocomplete="current-password"/>
+        <label>Password</label>
+        <input
+          type="password"
+          id="password"
+          placeholder="••••••••"
+        />
       </div>
 
-      <p class="error-msg" id="error-msg">Invalid email or password.</p>
+      <p class="error-msg" id="error-msg">
+        Invalid email or password.
+      </p>
 
-      <button class="login-btn" id="login-btn" onclick="handleLogin()">
+      <button
+        class="login-btn"
+        id="login-btn"
+        onclick="handleLogin()"
+      >
         Continue
       </button>
 
-      <div class="login-divider"><span>or</span></div>
-
-      <button class="google-btn" onclick="handleGoogleLogin()">
-        <svg class="google-icon" viewBox="0 0 24 24">
-          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
-          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
-        </svg>
-        Continue with Google
-      </button>
-
-      <p class="login-footer">
-        By signing in you agree to our Terms &amp; Privacy Policy.
-      </p>
     </div>
+
   </div>
 
-  <!-- ─── GOOD MORNING PAGE ─── -->
+  <!-- GOOD MORNING PAGE -->
+
   <div class="page hidden" id="gm-page">
+
     <div class="sky"></div>
-    <div class="stars-gm" id="gm-stars"></div>
+
     <div class="sun"></div>
-    <div class="rays" id="rays"></div>
-    <div class="hills">
-      <div class="hill hill-1"></div>
-      <div class="hill hill-2"></div>
-      <div class="hill hill-3"></div>
-    </div>
-    <div class="birds" id="birds"></div>
 
     <div class="gm-card">
-      <p class="greeting-label">A new day begins</p>
+
+      <p class="greeting-label">
+        A new day begins
+      </p>
+
       <h1 class="greeting-main">
         Good
-        <span class="greeting-italic">Morning</span>
+        <span class="greeting-italic">
+          Morning
+        </span>
       </h1>
+
       <div class="divider"></div>
-      <p class="subtext">May this day bring you light, joy &amp; wonder.</p>
+
+      <p class="subtext">
+        May this day bring you light, joy & wonder.
+      </p>
+
       <p class="user-greeting" id="user-greeting"></p>
+
       <p class="time-display" id="clock"></p>
-      <button class="logout-btn" onclick="handleLogout()">Sign Out</button>
+
+      <button
+        class="logout-btn"
+        onclick="handleLogout()"
+      >
+        Sign Out
+      </button>
+
     </div>
+
   </div>
 
-  <!-- Supabase SDK -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
   <script>
-    // ─── 🔧 YOUR SUPABASE CONFIG ──────────────────────────────
-    // Supabase Dashboard → Project Settings → API
-// Find these in: Supabase Dashboard → Project Settings → API
-const SUPABASE_URL  = 'https://htglcomsyyjncwasqbiu.supabase.co';  // replace
-const SUPABASE_ANON = 'sb_publishable_D00_YYxWu1hhDYuwgO3bKw_ToWrn6PN';             // replace
-    // Use 'sbClient' to avoid conflict with window.supabase from the SDK
-    let sbClient;
 
-    window.addEventListener('DOMContentLoaded', async () => {
-      sbClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+    async function handleLogin() {
 
-      buildGMScene();
-      updateClock();
-      setInterval(updateClock, 1000);
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+      const btn = document.getElementById('login-btn');
 
-      // Restore existing session on page load
-      const { data: { session } } = await sbClient.auth.getSession();
-      if (session) showGoodMorning(getNameFromSession(session));
+      document.getElementById('error-msg')
+        .classList.remove('visible');
 
-      // Handle Google OAuth redirect back to page
-      sbClient.auth.onAuthStateChange((_event, session) => {
-        if (session) showGoodMorning(getNameFromSession(session));
-      });
-    });
-
-    // ─── EMAIL LOGIN ─────────────────────────────────────────
-  async function handleLogin() {
-  const email    = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value;
-  const btn      = document.getElementById('login-btn');
-
-  document.getElementById('error-msg').classList.remove('visible');
-
-  if (!email || !password) {
-    showError('Please enter your email and password.');
-    return;
-  }
-
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Signing in…';
-
-  try {
-
-    // CHANGE THIS URL
-    const response = await fetch(
-      'https://deploy-simple-back-end.onrender.com/api/v1/auth?email='
-      + encodeURIComponent(email)
-      + '&password='
-      + encodeURIComponent(password),
-      {
-        method: 'GET'
+      if (!email || !password) {
+        showError('Please enter your email and password.');
+        return;
       }
-    );
 
-    const text = await response.text();
+      btn.disabled = true;
 
-    if (response.ok) {
-      showGoodMorning(email.split('@')[0]);
-    } else {
-      showError(text || 'Invalid email or password.');
+      btn.innerHTML =
+        '<span class="spinner"></span> Signing in…';
+
+      try {
+
+        // CHANGE THIS TO YOUR LIVE BACKEND URL
+
+        const response = await fetch(
+          'https://deploy-simple-back-end.onrender.com/api/v1/auth?email='
+          + encodeURIComponent(email)
+          + '&password='
+          + encodeURIComponent(password),
+          {
+            method: 'GET'
+          }
+        );
+
+        const text = await response.text();
+
+        if (response.ok) {
+          showGoodMorning(email.split('@')[0]);
+        } else {
+          showError(text || 'Invalid credentials.');
+        }
+
+      } catch (err) {
+
+        showError('Unable to connect to server.');
+
+      }
+
+      btn.disabled = false;
+      btn.innerHTML = 'Continue';
     }
 
-  } catch (err) {
-    showError('Unable to connect to server.');
-  }
+    function handleLogout() {
 
-  btn.disabled = false;
-  btn.innerHTML = 'Continue';
-}
+      document.getElementById('gm-page')
+        .classList.add('hidden');
 
-    // ─── GOOGLE LOGIN ────────────────────────────────────────
-    async function handleGoogleLogin() {
-      const { error } = await sbClient.auth.signInWithOAuth({
-        provider: 'google',
-        options: { redirectTo: window.location.href }
-      });
-      if (error) showError(error.message);
+      document.getElementById('login-page')
+        .classList.remove('hidden');
     }
 
-    // ─── LOGOUT ──────────────────────────────────────────────
-    async function handleLogout() {
-      await sbClient.auth.signOut();
-      document.getElementById('gm-page').classList.add('hidden');
-      document.getElementById('login-page').classList.remove('hidden');
-    }
-
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Enter') handleLogin();
-    });
-
-    // ─── PAGE SWITCH ─────────────────────────────────────────
     function showGoodMorning(name) {
-      document.getElementById('user-greeting').textContent = `Welcome, ${capitalize(name)}`;
-      document.getElementById('login-page').classList.add('hidden');
-      document.getElementById('gm-page').classList.remove('hidden');
-    }
 
-    // ─── HELPERS ─────────────────────────────────────────────
-    function getNameFromSession(session) {
-      return session?.user?.user_metadata?.full_name
-          || session?.user?.user_metadata?.name
-          || session?.user?.email?.split('@')[0]
-          || 'Friend';
+      document.getElementById('user-greeting')
+        .textContent = `Welcome, ${capitalize(name)}`;
+
+      document.getElementById('login-page')
+        .classList.add('hidden');
+
+      document.getElementById('gm-page')
+        .classList.remove('hidden');
     }
 
     function showError(msg) {
+
       const el = document.getElementById('error-msg');
+
       el.textContent = msg;
+
       el.classList.add('visible');
     }
 
-    function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+    function capitalize(s) {
+      return s.charAt(0).toUpperCase() + s.slice(1);
+    }
 
     function updateClock() {
+
       const now = new Date();
+
       const h = String(now.getHours()).padStart(2,'0');
       const m = String(now.getMinutes()).padStart(2,'0');
       const s = String(now.getSeconds()).padStart(2,'0');
-      document.getElementById('clock').textContent = `${h} : ${m} : ${s}`;
+
+      document.getElementById('clock').textContent =
+        `${h} : ${m} : ${s}`;
     }
 
-    // ─── GOOD MORNING SCENE ──────────────────────────────────
-    function buildGMScene() {
-      const starsEl = document.getElementById('gm-stars');
-      for (let i = 0; i < 80; i++) {
-        const s = document.createElement('div');
-        s.className = 'star';
-        s.style.left = Math.random() * 100 + '%';
-        s.style.top  = Math.random() * 60 + '%';
-        s.style.opacity = (Math.random() * 0.6 + 0.2).toFixed(2);
-        s.style.width = s.style.height = (Math.random() * 2 + 1) + 'px';
-        starsEl.appendChild(s);
+    updateClock();
+
+    setInterval(updateClock, 1000);
+
+    document.addEventListener('keydown', e => {
+
+      if (e.key === 'Enter') {
+        handleLogin();
       }
 
-      const raysEl = document.getElementById('rays');
-      for (let i = 0; i < 12; i++) {
-        const r = document.createElement('div');
-        r.style.cssText = `
-          position:absolute; width:2px; bottom:0; left:-1px;
-          border-radius:2px;
-          background:linear-gradient(to top,rgba(255,220,100,0.6),transparent);
-          transform-origin:bottom center;
-          transform:rotate(${(i/12)*360}deg);
-          height:${80 + Math.random()*80}px;
-        `;
-        raysEl.appendChild(r);
-      }
+    });
 
-      const birdsEl = document.getElementById('birds');
-      [
-        { top:'10%', delay:'4.5s', dur:'8s' },
-        { top:'25%', delay:'5.5s', dur:'10s' },
-        { top:'5%',  delay:'6.5s', dur:'9s' },
-        { top:'18%', delay:'7s',   dur:'11s' },
-      ].forEach(b => {
-        const bird = document.createElement('div');
-        bird.className = 'bird';
-        bird.style.top = b.top;
-        bird.style.animationDelay = b.delay;
-        bird.style.animationDuration = b.dur;
-        birdsEl.appendChild(bird);
-      });
-    }
   </script>
+
 </body>
 </html>
